@@ -1,43 +1,62 @@
 .chart-card {
   background: white;
-  border: 1px solid #e8e8e5;
-  border-radius: 8px;
+  border: 1px solid #e5dfd6;
+  border-radius: 12px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: all 0.2s;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: all 0.2s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .chart-card:hover {
-  border-color: #d8d8d0;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+  border-color: #d4cfc3;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
 }
 
 .chart-card-header {
-  padding: 20px;
-  border-bottom: 1px solid #f0f0f0;
+  padding: 24px;
+  border-bottom: 1px solid #e5dfd6;
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.chart-card-title-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.chart-card-eyebrow {
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: #a89c8f;
 }
 
 .chart-card-title {
-  margin: 0;
-}
-
-.chart-card-title h3 {
   font-size: 16px;
-  font-weight: 600;
-  color: #1a1a1a;
-  margin-bottom: 4px;
+  font-weight: 700;
+  color: #1a1815;
+  margin: 0;
+  letter-spacing: -0.3px;
 }
 
-.chart-card-title p {
+.chart-card-subtitle {
   font-size: 13px;
-  color: #999;
+  color: #7a7167;
   margin: 0;
+}
+
+.chart-card-action {
+  flex-shrink: 0;
 }
 
 .chart-card-body {
-  padding: 20px;
+  padding: 24px;
   flex: 1;
   display: flex;
   align-items: center;
@@ -45,6 +64,21 @@
 }
 
 @media (max-width: 1024px) {
+  .chart-card-header {
+    padding: 20px;
+    flex-direction: column;
+  }
+
+  .chart-card-body {
+    padding: 20px;
+  }
+
+  .chart-card-title {
+    font-size: 15px;
+  }
+}
+
+@media (max-width: 768px) {
   .chart-card-header {
     padding: 16px;
   }

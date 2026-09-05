@@ -1,0 +1,105 @@
+.audit-timeline {
+  background: white;
+  border: 1px solid #e5dfd6;
+  border-radius: 12px;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.timeline-item {
+  display: flex;
+  gap: 20px;
+  padding: 20px 0;
+  position: relative;
+}
+
+.timeline-item:first-child {
+  padding-top: 0;
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+.timeline-marker {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0;
+  flex-shrink: 0;
+  position: relative;
+  top: 2px;
+}
+
+.timeline-dot {
+  width: 10px;
+  height: 10px;
+  background: #5b7da8;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 0 0 2px #e5dfd6;
+}
+
+.timeline-line {
+  width: 1px;
+  height: 60px;
+  background: #e5dfd6;
+  margin-top: 8px;
+}
+
+.timeline-content {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 2px;
+}
+
+.timeline-time {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+  color: #a89c8f;
+  font-weight: 500;
+}
+
+.timeline-time svg {
+  opacity: 0.6;
+}
+
+.timeline-action {
+  font-size: 14px;
+  font-weight: 700;
+  color: #1a1815;
+}
+
+.timeline-description {
+  font-size: 13px;
+  color: #7a7167;
+  line-height: 1.5;
+}
+
+.timeline-meta {
+  font-size: 11px;
+  color: #a89c8f;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+@media (max-width: 768px) {
+  .audit-timeline {
+    padding: 20px;
+  }
+
+  .timeline-item {
+    padding: 16px 0;
+    gap: 16px;
+  }
+
+  .timeline-line {
+    height: 50px;
+  }
+}

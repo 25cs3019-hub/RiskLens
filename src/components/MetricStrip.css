@@ -1,0 +1,98 @@
+.metric-strip {
+  background: white;
+  border: 1px solid #e5dfd6;
+  border-radius: 10px;
+  padding: 16px;
+  transition: all 0.2s ease;
+}
+
+.metric-strip:hover {
+  border-color: #d4cfc3;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.metric-strip-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.metric-strip-left {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+}
+
+.metric-strip-icon {
+  color: #5b7da8;
+  opacity: 0.7;
+  flex-shrink: 0;
+}
+
+.metric-strip-labels {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+.metric-strip-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: #4a4238;
+}
+
+.metric-strip-secondary {
+  font-size: 11px;
+  color: #a89c8f;
+}
+
+.metric-strip-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.metric-strip-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: #1a1815;
+  text-align: right;
+}
+
+.metric-strip-trend {
+  font-size: 12px;
+  font-weight: 600;
+  padding: 4px 8px;
+  border-radius: 4px;
+  white-space: nowrap;
+}
+
+.metric-strip-trend.trend-positive {
+  background: #f0fff4;
+  color: #22c55e;
+}
+
+.metric-strip-trend.trend-negative {
+  background: #fef2f2;
+  color: #ef4444;
+}
+
+.metric-strip-trend.trend-neutral {
+  background: #fffbeb;
+  color: #f59e0b;
+}
+
+@media (max-width: 1024px) {
+  .metric-strip {
+    padding: 12px;
+  }
+
+  .metric-strip-value {
+    font-size: 16px;
+  }
+}
