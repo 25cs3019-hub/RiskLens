@@ -7,13 +7,13 @@ export const mockMetrics = {
 };
 
 export const transactionRiskTrendData = [
-  { time: 'Jan 1', risk: 34, transactions: 2400 },
-  { time: 'Jan 2', risk: 42, transactions: 2210 },
-  { time: 'Jan 3', risk: 28, transactions: 2290 },
-  { time: 'Jan 4', risk: 51, transactions: 2000 },
-  { time: 'Jan 5', risk: 35, transactions: 2181 },
-  { time: 'Jan 6', risk: 22, transactions: 2500 },
-  { time: 'Jan 7', risk: 38, transactions: 2100 }
+  { time: 'Mon', risk: 34, transactions: 2400 },
+  { time: 'Tue', risk: 42, transactions: 2210 },
+  { time: 'Wed', risk: 28, transactions: 2290 },
+  { time: 'Thu', risk: 51, transactions: 2000 },
+  { time: 'Fri', risk: 35, transactions: 2181 },
+  { time: 'Sat', risk: 22, transactions: 2500 },
+  { time: 'Sun', risk: 38, transactions: 2100 }
 ];
 
 export const riskDistributionData = [
