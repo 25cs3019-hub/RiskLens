@@ -4,43 +4,42 @@
   justify-content: center;
   min-height: 100vh;
   padding: 32px;
-  background: #fafaf8;
 }
 
 .placeholder-content {
   text-align: center;
   background: white;
-  border: 1px solid #e8e8e5;
-  border-radius: 8px;
+  border: 1px solid #e5dfd6;
+  border-radius: 12px;
   padding: 60px 40px;
-  max-width: 400px;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  max-width: 420px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
 .placeholder-icon {
-  font-size: 48px;
-  margin-bottom: 16px;
+  font-size: 52px;
+  margin-bottom: 20px;
   display: block;
 }
 
 .placeholder-content h2 {
   font-size: 24px;
-  font-weight: 600;
-  color: #1a1a1a;
+  font-weight: 700;
+  color: #1a1815;
   margin-bottom: 12px;
   letter-spacing: -0.3px;
 }
 
 .placeholder-content p {
   font-size: 14px;
-  color: #999;
+  color: #7a7167;
   line-height: 1.6;
   margin: 0;
 }
 
 @media (max-width: 768px) {
   .placeholder-page {
-    min-height: calc(100vh - 72px);
+    min-height: calc(100vh - 64px);
     padding: 24px;
   }
 
@@ -49,7 +48,7 @@
   }
 
   .placeholder-icon {
-    font-size: 40px;
+    font-size: 44px;
   }
 
   .placeholder-content h2 {

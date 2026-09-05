@@ -1,206 +1,212 @@
-import React from 'react';
-import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { AlertCircle, TrendingUp, Shield, DollarSign, Target, Activity } from 'lucide-react';
-import StatCard from '../components/StatCard';
-import RiskScore from '../components/RiskScore';
+import React, { useState } from 'react';
+import { LineChart, Line, ResponsiveContainer, XAxis, YAxis, CartesianGrid, Tooltip } from 'recharts';
+import { TrendingUp, AlertCircle, DollarSign, Target, BarChart3 } from 'lucide-react';
+import RiskPostureCard from '../components/RiskPostureCard';
+import MetricStrip from '../components/MetricStrip';
 import ChartCard from '../components/ChartCard';
-import AlertCard from '../components/AlertCard';
-import {
-  mockMetrics,
-  transactionRiskTrendData,
-  riskDistributionData,
-  recentAlerts,
-  auditActivity
-} from '../data/mockData';
+import RiskSignalBreakdown from '../components/RiskSignalBreakdown';
+import AlertTable from '../components/AlertTable';
+import AuditTimeline from '../components/AuditTimeline';
+import { mockMetrics, transactionRiskTrendData, recentAlerts, auditActivity } from '../data/mockData';
 import './Overview.css';
 
 function Overview() {
+  const [timeRange, setTimeRange] = useState('24h');
+
+  const riskSignals = [
+    { name: 'Velocity anomaly', value: 32 },
+    { name: 'Repeated attempts', value: 24 },
+    { name: 'Device mismatch', value: 18 },
+    { name: 'Amount deviation', value: 10 }
+  ];
+
+  const alertsForTable = [
+    {
+      id: 1,
+      title: 'Unusual Transaction Pattern',
+      description: 'Account TXN-2024-001 shows 5 large transactions',
+      risk: 'critical',
+      affected: '42 txns',
+      exposure: '₹82,400',
+      timestamp: '3m ago'
+    },
+    {
+      id: 2,
+      title: 'Velocity Breach',
+      description: 'User exceeded daily transaction limit',
+      risk: 'high',
+      affected: '18 txns',
+      exposure: '₹34,200',
+      timestamp: '15m ago'
+    },
+    {
+      id: 3,
+      title: 'Device Fingerprint Mismatch',
+      description: 'Login attempt from unrecognized device',
+      risk: 'medium',
+      affected: '1 txn',
+      exposure: '₹8,900',
+      timestamp: '32m ago'
+    },
+    {
+      id: 4,
+      title: 'Chargeback Filed',
+      description: 'Transaction MER-2024-556 disputed',
+      risk: 'high',
+      affected: '1 txn',
+      exposure: '₹12,500',
+      timestamp: '1h ago'
+    }
+  ];
+
   return (
     <div className="overview-page">
       {/* Page Header */}
       <div className="page-header">
-        <div className="page-header-content">
-          <h1>Risk Command Center</h1>
-          <p>Monitor transaction risk, investigate anomalies, and keep every decision accountable.</p>
+        <div className="page-header-left">
+          <span className="page-eyebrow">RISK INTELLIGENCE</span>
+          <h1 className="page-title">Risk Command Center</h1>
+          <p className="page-subtitle">
+            Understand what changed, why it matters, and where your attention is needed.
+          </p>
+        </div>
+        <div className="page-header-right">
+          <div className="time-selector">
+            <button
+              className={`time-btn ${timeRange === '24h' ? 'active' : ''}`}
+              onClick={() => setTimeRange('24h')}
+            >
+              Last 24h
+            </button>
+            <button
+              className={`time-btn ${timeRange === '7d' ? 'active' : ''}`}
+              onClick={() => setTimeRange('7d')}
+            >
+              7 days
+            </button>
+          </div>
+          <div className="demo-pill">Demo data</div>
         </div>
       </div>
 
-      {/* Key Metrics */}
-      <section className="metrics-grid">
-        <StatCard
-          label="Risk Health"
-          value={`${mockMetrics.riskHealth}`}
-          subtext="Overall platform risk score"
-          icon={Shield}
-          trend="↓ 5% from yesterday"
-          trendDirection="positive"
-        />
-        <StatCard
-          label="Transactions Monitored"
-          value={mockMetrics.transactionsMonitored}
-          subtext="Last 24 hours"
-          icon={TrendingUp}
-          trend="↑ 12% from last week"
-          trendDirection="positive"
-        />
-        <StatCard
-          label="Suspicious Activity"
-          value={mockMetrics.suspiciousActivity}
-          subtext="Flagged for review"
-          icon={AlertCircle}
-          trend="↑ 8% anomalies"
-          trendDirection="negative"
-        />
-        <StatCard
-          label="Estimated Loss Prevented"
-          value={mockMetrics.estimatedLossPrevented}
-          subtext="This month"
-          icon={DollarSign}
-          trend="↑ 23% vs last month"
-          trendDirection="positive"
-        />
-        <StatCard
-          label="False Positive Rate"
-          value={mockMetrics.falsePositiveRate}
-          subtext="Lower is better"
-          icon={Target}
-          trend="↓ 0.3% improvement"
-          trendDirection="positive"
+      {/* Primary Risk Posture Card */}
+      <section className="section-primary">
+        <RiskPostureCard
+          score={28}
+          trend={-5}
+          metrics={{
+            flagged: '127',
+            prevented: '₹4.2Cr',
+            accuracy: '97.9%'
+          }}
         />
       </section>
 
-      {/* Charts Section */}
-      <section className="charts-section">
-        <div className="charts-row">
-          <ChartCard
-            title="Transaction Risk Trend"
-            subtitle="7-day moving average of risk scores"
-          >
-            <ResponsiveContainer width="100%" height={300}>
-              <LineChart data={transactionRiskTrendData}>
-                <CartesianGrid strokeDasharray="3 3" stroke="#e8e8e5" />
-                <XAxis dataKey="time" stroke="#999" style={{ fontSize: '12px' }} />
-                <YAxis stroke="#999" style={{ fontSize: '12px' }} />
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: '#fff',
-                    border: '1px solid #e8e8e5',
-                    borderRadius: '6px'
-                  }}
-                  cursor={{ stroke: '#e8e8e5' }}
-                />
-                <Legend />
-                <Line
-                  type="monotone"
-                  dataKey="risk"
-                  stroke="#5b7da8"
-                  strokeWidth={2}
-                  dot={{ fill: '#5b7da8', r: 4 }}
-                  activeDot={{ r: 6 }}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </ChartCard>
-          <ChartCard
-            title="Risk Distribution"
-            subtitle="Transaction breakdown by risk level"
-          >
-            <ResponsiveContainer width="100%" height={300}>
-              <PieChart>
-                <Pie
-                  data={riskDistributionData}
-                  cx="50%"
-                  cy="50%"
-                  innerRadius={60}
-                  outerRadius={100}
-                  paddingAngle={2}
-                  dataKey="value"
-                >
-                  {riskDistributionData.map((entry, index) => (
-                    <Cell key={`cell-${index}`} fill={entry.color} />
-                  ))}
-                </Pie>
-                <Tooltip
-                  contentStyle={{
-                    backgroundColor: '#fff',
-                    border: '1px solid #e8e8e5',
-                    borderRadius: '6px'
-                  }}
-                />
-                <Legend />
-              </PieChart>
-            </ResponsiveContainer>
-          </ChartCard>
+      {/* Secondary Metrics */}
+      <section className="section-metrics">
+        <div className="metrics-layout">
+          <MetricStrip
+            value={mockMetrics.transactionsMonitored}
+            label="Transactions Monitored"
+            secondary="Last 24 hours"
+            icon={TrendingUp}
+            trend="↑ 12%"
+            trendType="positive"
+          />
+          <MetricStrip
+            value={mockMetrics.suspiciousActivity}
+            label="Suspicious Activity"
+            secondary="Flagged for review"
+            icon={AlertCircle}
+            trend="↑ 8%"
+            trendType="negative"
+          />
+          <MetricStrip
+            value={mockMetrics.falsePositiveRate}
+            label="False Positive Rate"
+            secondary="Lower is better"
+            icon={Target}
+            trend="↓ 0.3%"
+            trendType="positive"
+          />
         </div>
       </section>
 
-      {/* Recent Alerts Section */}
+      {/* Main Chart */}
+      <section className="section">
+        <ChartCard
+          eyebrow="ANALYSIS"
+          title="Transaction Risk Trend"
+          subtitle="Risk movement across the last 7 days"
+          action={
+            <div className="chart-selector">
+              <button className="chart-btn active">7D</button>
+              <button className="chart-btn">30D</button>
+            </div>
+          }
+        >
+          <ResponsiveContainer width="100%" height={300}>
+            <LineChart data={transactionRiskTrendData}>
+              <defs>
+                <linearGradient id="riskGradient" x1="0" y1="0" x2="0" y2="1">
+                  <stop offset="0%" stopColor="#5b7da8" stopOpacity={0.1} />
+                  <stop offset="100%" stopColor="#5b7da8" stopOpacity={0} />
+                </linearGradient>
+              </defs>
+              <CartesianGrid strokeDasharray="3 3" stroke="#e5dfd6" vertical={false} />
+              <XAxis dataKey="time" stroke="#a89c8f" style={{ fontSize: '12px' }} />
+              <YAxis stroke="#a89c8f" style={{ fontSize: '12px' }} />
+              <Tooltip
+                contentStyle={{
+                  backgroundColor: '#fff',
+                  border: '1px solid #e5dfd6',
+                  borderRadius: '8px',
+                  boxShadow: '0 4px 12px rgba(0,0,0,0.08)'
+                }}
+                cursor={{ stroke: '#5b7da8', strokeWidth: 1 }}
+              />
+              <Line
+                type="monotone"
+                dataKey="risk"
+                stroke="#5b7da8"
+                strokeWidth={2.5}
+                dot={false}
+                isAnimationActive={true}
+              />
+            </LineChart>
+          </ResponsiveContainer>
+          <div className="chart-annotation">Risk spike detected · Tue 14:20</div>
+        </ChartCard>
+      </section>
+
+      {/* Risk Signal Breakdown */}
+      <section className="section">
+        <RiskSignalBreakdown
+          score={91}
+          signals={riskSignals}
+          explanation="Transaction velocity is approximately 4.2× above the recent merchant baseline. The account also shows repeated failed attempts from an inconsistent device."
+        />
+      </section>
+
+      {/* Alerts Table */}
       <section className="section">
         <div className="section-header">
-          <h2>Recent Risk Alerts</h2>
-          <p>Latest flagged transactions requiring review</p>
+          <span className="section-eyebrow">ACTIVE THREATS</span>
+          <h2 className="section-title">Recent Risk Alerts</h2>
         </div>
-        <div className="alerts-grid">
-          {recentAlerts.map(alert => (
-            <AlertCard
-              key={alert.id}
-              title={alert.title}
-              description={alert.description}
-              risk={alert.risk}
-              timestamp={alert.timestamp}
-              onClick={() => console.log('Alert clicked:', alert.id)}
-            />
-          ))}
-        </div>
+        <AlertTable
+          alerts={alertsForTable}
+          onRowClick={(alert) => console.log('Alert clicked:', alert)}
+        />
       </section>
 
-      {/* AI Insight Section */}
-      <section className="section">
-        <div className="insight-card">
-          <div className="insight-header">
-            <Activity className="insight-icon" />
-            <h3>Explainable AI Insight</h3>
-          </div>
-          <p className="insight-text">
-            Pattern analysis detected a 23% increase in cross-border transactions originating from new merchant accounts. The model attributes this to seasonal e-commerce activity. However, 3 flagged accounts show velocity patterns inconsistent with historical behavior. Recommend manual review of merchants: MER-2024-445, MER-2024-512, MER-2024-689.
-          </p>
-          <div className="insight-actions">
-            <button className="insight-btn">Review Flagged Merchants</button>
-            <button className="insight-btn secondary">View Full Analysis</button>
-          </div>
-        </div>
-      </section>
-
-      {/* Audit Activity Section */}
+      {/* Audit Timeline */}
       <section className="section">
         <div className="section-header">
-          <h2>Recent Audit Activity</h2>
-          <p>System and user actions logged for compliance</p>
+          <span className="section-eyebrow">COMPLIANCE</span>
+          <h2 className="section-title">Recent Audit Activity</h2>
         </div>
-        <div className="audit-table">
-          <table>
-            <thead>
-              <tr>
-                <th>Action</th>
-                <th>Description</th>
-                <th>User</th>
-                <th>Timestamp</th>
-              </tr>
-            </thead>
-            <tbody>
-              {auditActivity.map(activity => (
-                <tr key={activity.id}>
-                  <td>
-                    <span className="audit-action">{activity.action}</span>
-                  </td>
-                  <td className="audit-description">{activity.description}</td>
-                  <td className="audit-user">{activity.user}</td>
-                  <td className="audit-timestamp">{activity.timestamp}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
+        <AuditTimeline activities={auditActivity} />
       </section>
     </div>
   );
