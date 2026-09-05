@@ -1,32 +1,36 @@
 import React from 'react';
 import './RiskSignalBreakdown.css';
 
-function RiskSignalBreakdown({ score = 91, signals, explanation }) {
-  const maxSignal = Math.max(...signals.map(s => s.value));
+function RiskSignalBreakdown() {
+  const signals = [
+    { name: 'Velocity anomaly', value: 32 },
+    { name: 'Repeated attempts', value: 24 },
+    { name: 'Device mismatch', value: 18 },
+    { name: 'Amount deviation', value: 10 }
+  ];
+  const maxValue = 32;
 
   return (
     <div className="risk-signal-breakdown">
       <div className="signal-header">
-        <span className="signal-eyebrow">WHY WAS THIS FLAGGED?</span>
+        <h3 className="signal-title">Why was this flagged?</h3>
         <div className="signal-score">
-          <div className="signal-score-number">{score}</div>
-          <div className="signal-score-label">/ 100</div>
+          <span className="score-number">91</span>
+          <span className="score-label">/ 100</span>
         </div>
       </div>
 
       <div className="signal-list">
         {signals.map((signal, idx) => (
           <div key={idx} className="signal-item">
-            <div className="signal-item-label">
+            <div className="signal-label-row">
               <span className="signal-name">{signal.name}</span>
-              <span className="signal-value">+{signal.value}</span>
+              <span className="signal-contribution">+{signal.value}</span>
             </div>
-            <div className="signal-bar-container">
+            <div className="signal-bar-wrapper">
               <div
                 className="signal-bar"
-                style={{
-                  width: `${(signal.value / maxSignal) * 100}%`
-                }}
+                style={{ width: `${(signal.value / maxValue) * 100}%` }}
               ></div>
             </div>
           </div>
@@ -34,12 +38,12 @@ function RiskSignalBreakdown({ score = 91, signals, explanation }) {
       </div>
 
       <div className="signal-explanation">
-        <p>{explanation}</p>
+        Transaction velocity is approximately 4.2× above the recent merchant baseline. The account also shows repeated failed attempts from an inconsistent device.
       </div>
 
       <div className="signal-actions">
-        <button className="signal-action-btn primary">View Transaction</button>
-        <button className="signal-action-btn secondary">Review Decision</button>
+        <button className="signal-action-btn primary">Review transaction</button>
+        <button className="signal-action-btn secondary">View audit trail</button>
       </div>
     </div>
   );

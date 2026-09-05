@@ -1,0 +1,64 @@
+.metric-block {
+  background: white;
+  border: 1px solid #e1ddd3;
+  border-radius: 10px;
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: all 0.2s ease;
+}
+
+.metric-block:hover {
+  border-color: #d4cfc2;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  transform: translateY(-1px);
+}
+
+.metric-block-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: #6b6660;
+}
+
+.metric-block-value {
+  font-size: 22px;
+  font-weight: 700;
+  color: #1f1f1f;
+  line-height: 1.1;
+}
+
+.metric-block-secondary {
+  font-size: 11px;
+  color: #9b9390;
+}
+
+.metric-block-trend {
+  font-size: 11px;
+  font-weight: 700;
+  margin-top: 4px;
+  padding-top: 8px;
+  border-top: 1px solid #e1ddd3;
+}
+
+.metric-block-trend.trend-positive {
+  color: #22c55e;
+}
+
+.metric-block-trend.trend-negative {
+  color: #ef4444;
+}
+
+.metric-block-trend.trend-neutral {
+  color: #f59e0b;
+}
+
+@media (max-width: 1024px) {
+  .metric-block {
+    padding: 16px;
+  }
+
+  .metric-block-value {
+    font-size: 18px;
+  }
+}

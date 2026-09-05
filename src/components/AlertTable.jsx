@@ -1,20 +1,42 @@
 import React from 'react';
-import { ChevronRight } from 'lucide-react';
 import './AlertTable.css';
 
-function AlertTable({ alerts, onRowClick }) {
-  const getRiskColor = (risk) => {
-    const colors = {
-      critical: '#dc2626',
-      high: '#d97706',
-      medium: '#f59e0b',
-      low: '#16a34a'
-    };
-    return colors[risk] || '#999';
-  };
+function AlertTable() {
+  const alerts = [
+    {
+      id: 1,
+      severity: 'critical',
+      event: 'Velocity spike',
+      affected: '42 txns',
+      exposure: '₹82,400',
+      time: '3m',
+      status: 'review'
+    },
+    {
+      id: 2,
+      severity: 'high',
+      event: 'Device anomaly',
+      affected: '18 txns',
+      exposure: '₹31,200',
+      time: '8m',
+      status: 'open'
+    },
+    {
+      id: 3,
+      severity: 'medium',
+      event: 'Amount deviation',
+      affected: '5 txns',
+      exposure: '₹14,800',
+      time: '24m',
+      status: 'monitoring'
+    }
+  ];
 
-  const getRiskLabel = (risk) => {
-    return risk.charAt(0).toUpperCase() + risk.slice(1);
+  const severityColor = {
+    critical: '#dc2626',
+    high: '#d97706',
+    medium: '#f59e0b',
+    low: '#22c55e'
   };
 
   return (
@@ -27,35 +49,23 @@ function AlertTable({ alerts, onRowClick }) {
             <th>Affected</th>
             <th>Exposure</th>
             <th>Time</th>
-            <th></th>
           </tr>
         </thead>
         <tbody>
-          {alerts.map((alert) => (
-            <tr key={alert.id} onClick={() => onRowClick?.(alert)} className="alert-row">
+          {alerts.map(alert => (
+            <tr key={alert.id} className="alert-row">
               <td>
-                <div className="risk-badge" style={{ borderLeftColor: getRiskColor(alert.risk) }}>
-                  {getRiskLabel(alert.risk)}
+                <div
+                  className="severity-badge"
+                  style={{ borderLeftColor: severityColor[alert.severity] }}
+                >
+                  {alert.severity.charAt(0).toUpperCase() + alert.severity.slice(1)}
                 </div>
               </td>
-              <td>
-                <div className="alert-event">
-                  <div className="alert-title">{alert.title}</div>
-                  <div className="alert-desc">{alert.description}</div>
-                </div>
-              </td>
-              <td>
-                <span className="alert-meta">{alert.affected}</span>
-              </td>
-              <td>
-                <span className="alert-exposure">{alert.exposure}</span>
-              </td>
-              <td>
-                <span className="alert-time">{alert.timestamp}</span>
-              </td>
-              <td>
-                <ChevronRight size={18} className="alert-arrow" />
-              </td>
+              <td>{alert.event}</td>
+              <td className="text-meta">{alert.affected}</td>
+              <td className="text-strong">{alert.exposure}</td>
+              <td className="text-meta">{alert.time} ago</td>
             </tr>
           ))}
         </tbody>

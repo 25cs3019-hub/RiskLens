@@ -46,7 +46,7 @@ function Sidebar() {
   return (
     <>
       <button className="sidebar-toggle" onClick={() => setIsOpen(!isOpen)}>
-        {isOpen ? <X size={22} /> : <Menu size={22} />}
+        {isOpen ? <X size={20} /> : <Menu size={20} />}
       </button>
       <aside className={`sidebar ${isOpen ? 'open' : ''}`}>
         <div className="sidebar-header">
@@ -71,7 +71,7 @@ function Sidebar() {
                       className={`nav-item ${isActive ? 'active' : ''}`}
                       onClick={() => setIsOpen(false)}
                     >
-                      <Icon size={18} className="nav-icon" />
+                      <Icon size={17} className="nav-icon" />
                       <span className="nav-label">{item.label}</span>
                       {isActive && <div className="nav-accent"></div>}
                     </Link>
@@ -84,7 +84,7 @@ function Sidebar() {
 
         <div className="sidebar-footer">
           <div className="status-indicator">
-            <Circle size={6} fill="#22c55e" stroke="none" />
+            <Circle size={5} fill="#22c55e" stroke="none" />
             <div className="status-text">
               <div className="status-label">Risk engine operational</div>
               <div className="status-sublabel">Demo environment</div>

@@ -5,7 +5,7 @@ function ChartCard({ eyebrow, title, subtitle, action, children }) {
   return (
     <div className="chart-card">
       <div className="chart-card-header">
-        <div className="chart-card-title-group">
+        <div>
           {eyebrow && <div className="chart-card-eyebrow">{eyebrow}</div>}
           <h3 className="chart-card-title">{title}</h3>
           {subtitle && <p className="chart-card-subtitle">{subtitle}</p>}

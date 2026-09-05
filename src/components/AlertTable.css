@@ -1,9 +1,9 @@
 .alert-table-wrapper {
   background: white;
-  border: 1px solid #e5dfd6;
+  border: 1px solid #e1ddd3;
   border-radius: 12px;
   overflow: hidden;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
 }
 
 .alert-table {
@@ -11,23 +11,23 @@
   border-collapse: collapse;
 }
 
-.alert-table thead tr {
-  background: #f9faf8;
-  border-bottom: 1px solid #e5dfd6;
+.alert-table thead {
+  background: #fafaf8;
+  border-bottom: 1px solid #e1ddd3;
 }
 
 .alert-table th {
-  padding: 16px;
+  padding: 14px 18px;
   text-align: left;
-  font-size: 11px;
+  font-size: 10px;
   font-weight: 700;
-  color: #a89c8f;
+  color: #9b9390;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.7px;
 }
 
 .alert-table tbody tr {
-  border-bottom: 1px solid #e5dfd6;
+  border-bottom: 1px solid #e1ddd3;
   transition: all 0.2s ease;
   cursor: pointer;
 }
@@ -41,89 +41,48 @@
 }
 
 .alert-table td {
-  padding: 16px;
-  font-size: 13px;
-  color: #4a4238;
+  padding: 14px 18px;
+  font-size: 12px;
+  color: #3a3a3a;
 }
 
-.risk-badge {
+.severity-badge {
   display: inline-block;
-  padding: 6px 10px;
+  padding: 5px 9px;
   border-left: 3px solid;
   border-radius: 4px;
-  background: #f9faf8;
-  font-size: 12px;
-  font-weight: 600;
+  background: #fafaf8;
+  font-size: 11px;
+  font-weight: 700;
   text-transform: uppercase;
-  letter-spacing: 0.5px;
+  letter-spacing: 0.4px;
 }
 
-.alert-event {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+.text-meta {
+  color: #9b9390;
+  font-size: 11px;
 }
 
-.alert-title {
-  font-weight: 600;
-  color: #1a1815;
-}
-
-.alert-desc {
-  font-size: 12px;
-  color: #7a7167;
-}
-
-.alert-meta {
-  font-size: 12px;
-  color: #7a7167;
-}
-
-.alert-exposure {
-  font-weight: 600;
-  color: #1a1815;
-}
-
-.alert-time {
-  font-size: 12px;
-  color: #a89c8f;
-  white-space: nowrap;
-}
-
-.alert-arrow {
-  color: #a89c8f;
-  opacity: 0.5;
-  transition: all 0.2s ease;
-}
-
-.alert-row:hover .alert-arrow {
-  opacity: 1;
-  color: #5b7da8;
+.text-strong {
+  font-weight: 700;
+  color: #1f1f1f;
 }
 
 @media (max-width: 1024px) {
   .alert-table th,
   .alert-table td {
-    padding: 12px;
-    font-size: 12px;
+    padding: 12px 14px;
+    font-size: 11px;
   }
 }
 
 @media (max-width: 768px) {
   .alert-table {
-    font-size: 11px;
+    font-size: 10px;
   }
 
   .alert-table th,
   .alert-table td {
-    padding: 10px;
-  }
-
-  .alert-event {
-    gap: 2px;
-  }
-
-  .alert-desc {
-    display: none;
+    padding: 10px 12px;
   }
 }
